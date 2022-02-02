@@ -9,7 +9,7 @@
   (let [port   65432
         server (tcp/listen echo port)
         client @(tcp/client "localhost" port)
-        _msg    @(s/put! client req)
+        _msg   @(s/put! client req)
         res    @(s/take! client)]
     (.close server)
     res))
