@@ -5,4 +5,4 @@
 
 (defn create [host port]
   (d/chain (tcp/client {:host host :port port})
-           #(gopher/wrap-duplex-stream gopher/codec %)))
+           #(gopher/wrap-duplex-stream %)))

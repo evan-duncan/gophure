@@ -14,9 +14,9 @@
   via a single stream. Messages from the remote endpoint can be consumed
   via `take!`, and messages can be sent to the remote endpoint view `put!`.
   It returns a duplex stream which will take and emit arbitrary Clojure data,
-  via the protocol.
+  via gophure.gopher/codec.
   "
-  [protocol s]
+  [s]
   (let [out (s/stream)]
-    (s/connect (s/map #(io/encode protocol %) out) s)
-    (s/splice out (io/decode-stream s protocol))))
+    (s/connect (s/map #(io/encode codec %) out) s)
+    (s/splice out (io/decode-stream s codec))))

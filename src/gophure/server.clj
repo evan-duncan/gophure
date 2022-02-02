@@ -6,5 +6,5 @@
   "Start a TCP server handling Gopher protocol requests"
   [handler port]
   (tcp/start-server
-   (fn [s info] (handler (gopher/wrap-duplex-stream gopher/codec s) info))
+   (fn [s info] (handler (gopher/wrap-duplex-stream s) info))
    {:port port}))
