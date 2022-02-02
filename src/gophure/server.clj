@@ -1,4 +1,10 @@
 (ns gophure.server
-  (:require [gophure.tcp :as tcp]))
+  (:require [aleph.tcp :as lf]
+            [gophure.gopher :as gopher]))
 
-;; todo implement gopher server
+(defn listen
+  "Start a TCP server handling Gopher protocol requests"
+  [handler port]
+  (lf/start-server
+   (fn [s info] (handler (gopher/wrap-duplex-stream gopher/codec s) info))
+   {:port port}))

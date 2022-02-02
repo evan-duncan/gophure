@@ -1,5 +1,6 @@
-(ns gophure.tcp-test
-  (:require [gophure.tcp :as tcp]
+(ns gophure.server-test
+  (:require [gophure.server :as server]
+            [gophure.client :as client]
             [clojure.test :as t]
             [manifold.stream :as s]))
 
@@ -7,8 +8,8 @@
 
 (defn handle-request [req]
   (let [port   65432
-        server (tcp/listen echo port)
-        client @(tcp/client "localhost" port)
+        server (server/listen echo port)
+        client @(client/create "localhost" port)
         _msg   @(s/put! client req)
         res    @(s/take! client)]
     (.close server)
